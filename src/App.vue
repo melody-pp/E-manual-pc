@@ -1,21 +1,137 @@
 <template>
   <div id="app">
-    <router-view/>
+
+    <div ref="$Product" v-if="showProduct" class="container product-container">
+      <Product @toCate3="toCate3"/>
+    </div>
+    <div ref="$cate3" v-if="showCate3" class="container cate3-container">
+      <Cate3 @toDetail="toDetail"/>
+    </div>
+
+
+    <Nav @toProduct="toProduct"/>
+
+    <div ref="$welcome" v-if="showWelcome" class="container welcome-container">
+      <Welcome @toIndex="toProduct"/>
+    </div>
   </div>
 </template>
 
 <script>
+  import './common/lib'
   import 'normalize.css'
+  import { TimelineLite, TweenLite } from 'gsap'
+
+  import Welcome from './pages/welcome/Welcome'
+  import Nav from './pages/nav/Nav'
+  import Product from './pages/product/Product'
+  import Cate3 from './pages/product/Cate3'
+
   export default {
-    name: 'App'
+    name: 'App',
+    components: {Welcome, Nav, Product, Cate3},
+    data: () => ({
+      showWelcome: true,
+      showProduct: false,
+      showCate3: false,
+    }),
+    methods: {
+      toProduct () {
+        this.showWelcome = false
+        this.showProduct = true
+      },
+
+      toCate3 () {
+        this.showProduct = false
+        this.showCate3 = true
+      },
+      toDetail () {}
+    }
   }
 </script>
 
-<style>
+<style lang="scss">
   #app {
-    text-align: center;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: "微软雅黑";
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  ul, li {
+    list-style: none;
+  }
+
+  .clearfix {
+    overflow: hidden;
+    _zoom: 1;
+    &:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden
+    }
+  }
+
+  .fl {
+    float: left;
+  }
+
+  .fr {
+    float: right;
+  }
+
+  .container {
+    overflow: hidden;
+    position: absolute;
+  }
+
+  .welcome-container {
+    position: absolute;
+    z-index: 999;
+  }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
+
+  .slider-img {
+    width: 100%;
+  }
+
+  .slick-dotted.slick-slider {
+    font-size: 0;
+    margin-bottom: 0;
+  }
+
+  .slick-dots {
+    bottom: 15px;
+  }
+
+  .slick-dots li button:before {
+    opacity: 1;
+    color: #dcdcdc;
+  }
+
+  .slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: #7d1820;
+  }
+
+  .slick-dots li {
+    margin: 0;
   }
 </style>
