@@ -2,7 +2,7 @@
   <div class="product">
 
     <div class="slider-hot">
-      <div v-for="(item, index) in hotList" :key="index">
+      <div v-for="(item, index) in hotList" :key="index" @click="toDetail">
         <img :src="item.itemImg" class="slider-img">
       </div>
     </div>
@@ -49,9 +49,14 @@
       })
 
     },
-    methods:{
-      toCate3(){
+    methods: {
+      toCate3 () {
         this.$emit('toCate3')
+      },
+      toDetail () {
+        console.log('toDetail product')
+
+        this.$emit('toDetail')
       }
     }
   }

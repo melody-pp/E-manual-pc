@@ -49,9 +49,9 @@
         const $cates = Array.from(document.querySelectorAll('.cate-list .cate'))
 
         if (this.showCates) {
-          TweenMax.staggerTo($cates.reverse(), .7, {x: '120', autoAlpha: 0, ease: Power4.easeIn}, .2)
+          TweenMax.staggerTo($cates.reverse(), .6, {x: '120', autoAlpha: 0, ease: Power4.easeIn}, .1)
         } else {
-          TweenMax.staggerTo($cates, .7, {x: '0', autoAlpha: 1, ease: Power4.easeOut}, .2)
+          TweenMax.staggerTo($cates, .6, {x: '0', autoAlpha: 1, ease: Power4.easeOut}, .1)
         }
 
       },
@@ -64,14 +64,14 @@
 
 <style scoped lang="scss">
   .nav {
-    top: 1vh;
     width: 100%;
-    height: 10vh;
+    height: 11vh;
     line-height: 10vh;
     position: absolute;
     color: #8f6f3e;
     background-color: #e8e8e8;
     text-align: center;
+    border-top: 1vh solid #a77d4b;
 
     > span {
       font-size: 24px;

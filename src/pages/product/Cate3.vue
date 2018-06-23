@@ -1,5 +1,5 @@
 <template>
-  <div class="cate3 clearfix">
+  <div class="cate3 clearfix" @click="toDetail">
     <div class="w50">
       <img :src="cate3List[0].itemImg">
       <div>
@@ -54,6 +54,13 @@
           {itemImg: require('../../assets/cate3/11.png')},
           {itemImg: require('../../assets/cate3/12.png')},
         ]
+      }
+    },
+    methods: {
+      toDetail () {
+        console.log('toDetail cate3')
+
+        this.$emit('toDetail')
       }
     }
   }

@@ -2,12 +2,16 @@
   <div id="app">
 
     <div ref="$Product" v-if="showProduct" class="container product-container">
-      <Product @toCate3="toCate3"/>
+      <Product @toCate3="toCate3" @toDetail="toDetail"/>
     </div>
+
     <div ref="$cate3" v-if="showCate3" class="container cate3-container">
       <Cate3 @toDetail="toDetail"/>
     </div>
 
+    <div ref="$detail" v-if="showDetail" class="container detail-container">
+      <Detail/>
+    </div>
 
     <Nav @toProduct="toProduct"/>
 
@@ -26,26 +30,39 @@
   import Nav from './pages/nav/Nav'
   import Product from './pages/product/Product'
   import Cate3 from './pages/product/Cate3'
+  import Detail from './pages/detail/Detail'
 
   export default {
     name: 'App',
-    components: {Welcome, Nav, Product, Cate3},
+    components: {Welcome, Nav, Product, Cate3, Detail},
     data: () => ({
       showWelcome: true,
       showProduct: false,
       showCate3: false,
+      showDetail: false,
     }),
     methods: {
       toProduct () {
-        this.showWelcome = false
         this.showProduct = true
+
+        this.showWelcome = false
+        this.showCate3 = false
+        this.showDetail = false
       },
 
       toCate3 () {
-        this.showProduct = false
         this.showCate3 = true
+
+        this.showProduct = false
+        this.showDetail = false
       },
-      toDetail () {}
+      toDetail () {
+        console.log('toDetail app')
+        this.showDetail = true
+
+        this.showProduct = false
+        this.showCate3 = false
+      }
     }
   }
 </script>
