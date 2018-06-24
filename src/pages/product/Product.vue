@@ -19,9 +19,11 @@
 
 <script>
   import $ from 'jquery'
+  import { vuexMixin } from '../../common/mixins'
 
   export default {
     name: 'Product',
+    mixins: [vuexMixin],
     data: () => ({
       hotList: [
         {itemImg: require('../../assets/product/banner.png')},
@@ -51,10 +53,11 @@
     },
     methods: {
       toCate3 () {
+        this.setState({goBackPosition: 'cate2'})
         this.$emit('toCate3')
       },
       toDetail () {
-        console.log('toDetail product')
+        this.setState({goBackPosition: 'cate2'})
 
         this.$emit('toDetail')
       }
@@ -95,13 +98,13 @@
 
       &.slick-prev {
         z-index: 2;
-        left: 50px;
+        left: 3vw;
         background-image: url("../../assets/product/left.png");
 
       }
 
       &.slick-next {
-        right: 50px;
+        right: 3vw;
         background-image: url("../../assets/product/right.png");
       }
     }
@@ -112,7 +115,7 @@
 
     .slider-img {
       margin: auto;
-      width: auto;
+      width: 17vw;
       height: 15vh;
     }
   }

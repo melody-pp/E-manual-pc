@@ -1,9 +1,9 @@
 <template>
   <div class="nav">
-    <img src="../../assets/nav/return.png" class="return">
-    <img src="../../assets/nav/return.png" class="search">
+    <img src="../../assets/nav/return.png" class="return" @click="goBack">
+    <img src="../../assets/nav/return.png" class="search" @click="showSearch">
 
-    <span>首页</span>
+    <span @click="toHome">首页</span>
     <span @click="toggleCates">分类 <img src="../../assets/nav/arrows.png"></span>
     <span>收藏夹</span>
 
@@ -12,17 +12,30 @@
         <img :src="cate.itemImg">
       </div>
     </div>
+
+    <div class="searchBar" ref="searchBar" @click="hideSearch">
+      <img class="searchText fl" src="../../assets/nav/SearchText.png">
+      <div class="searchBox fl clearfix">
+        <input type="text" class="searchInput fl">
+        <span class="spliterLine fl"></span>
+        <img class="searchIcon fl" src="../../assets/nav/searchIcon2.png">
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
-  import { TweenMax } from 'gsap'
+  import { vuexMixin } from '../../common/mixins'
+  import { TimelineLite, TweenLite } from 'gsap'
 
   export default {
     name: 'Nav',
+    mixins: [vuexMixin],
     data: () => ({
-      isBusy: false,
-      showCates: false,
+      catesVisible: false,
+      showTimeline: null,
+      hideTimeline: null,
       cateList: [
         {itemImg: require('../../assets/nav/04.png')},
         {itemImg: require('../../assets/nav/05.png')},
@@ -34,29 +47,62 @@
         {itemImg: require('../../assets/nav/11.png')},
       ]
     }),
+    mounted () {
+      this.bus.$on('hideCate', this.hideCates.bind(this))
+    },
     methods: {
       toggleCates () {
-        if (this.isBusy) {
-          return
+        this.catesVisible
+          ? this.hideCates()
+          : this.showCates()
+      },
+      showCates () {
+        this.catesVisible = true
+
+        if (this.hideTimeline) {
+          this.hideTimeline.pause()
         }
 
-        this.isBusy = true
-        setTimeout(() => {
-          this.isBusy = false
-          this.showCates = !this.showCates
-        }, 1800)
+        if (this.showTimeline) {
+          return this.showTimeline.restart()
+        }
 
+        this.showTimeline = new TimelineLite()
         const $cates = Array.from(document.querySelectorAll('.cate-list .cate'))
 
-        if (this.showCates) {
-          TweenMax.staggerTo($cates.reverse(), .6, {x: '120', autoAlpha: 0, ease: Power4.easeIn}, .1)
-        } else {
-          TweenMax.staggerTo($cates, .6, {x: '0', autoAlpha: 1, ease: Power4.easeOut}, .1)
+        this.showTimeline.staggerTo($cates, .6, {x: '0', autoAlpha: 1, ease: Power4.easeOut}, .1)
+      },
+      hideCates () {
+        this.catesVisible = false
+
+        if (this.showTimeline) {
+          this.showTimeline.pause()
         }
 
+        if (this.hideTimeline) {
+          return this.hideTimeline.restart()
+        }
+
+        this.hideTimeline = new TimelineLite()
+        const $cates = Array.from(document.querySelectorAll('.cate-list .cate'))
+
+        this.hideTimeline.staggerTo($cates.reverse(), .6, {x: '120', autoAlpha: 0, ease: Power4.easeIn}, .1)
       },
       toProduct () {
         this.$emit('toProduct')
+      },
+      showSearch () {
+        TweenLite.to(this.$refs.searchBar, 1, {y: window.innerHeight * 0.1, ease: Elastic.easeOut.config(1, 0.5)})
+      },
+      hideSearch () {
+        TweenLite.to(this.$refs.searchBar, 1, {y: '-300px'})
+      },
+      toHome () {
+        this.$emit('toHome')
+      },
+      goBack () {
+        this.$emit('goBack')
+
       }
     }
   }
@@ -74,8 +120,9 @@
     border-top: 1vh solid #a77d4b;
 
     > span {
-      font-size: 24px;
+      font-size: 1.5vw;
       margin: 0 3vw;
+      cursor: pointer;
     }
 
     > img {
@@ -86,9 +133,13 @@
 
     .return {
       left: 5vw;
+      width: 2vw;
+      cursor: pointer;
     }
     .search {
       right: 5vw;
+      width: 2vw;
+      cursor: pointer;
     }
 
     .cate-list {
@@ -110,5 +161,48 @@
         width: 7vw;
       }
     }
+    .searchBar {
+      width: 100vw;
+      left: 0;
+      top: 0;
+      padding: 2vw 32vw;
+      position: absolute;
+      background: #373743;
+      box-sizing: border-box;
+      vertical-align: bottom;
+      text-align: center;
+      transform: matrix(1, 0, 0, 1, 0, -200);
+      .searchText {
+        width: 4vw;
+        margin-top: 0.3vw;
+      }
+      .searchBox {
+        width: 28vw;
+        margin-left: 1vw;
+        background-color: #fff;
+        height: 1.6vw;
+        line-height: 1.6vw;
+        border-radius: 3px;
+        .searchIcon {
+          width: 1vw;
+          margin: 0.3vw 0.4vw;
+        }
+        .searchInput {
+          width: 26vw;
+          border: none;
+          height: 1.6vw;
+          line-height: 1.6vw;
+        }
+        .spliterLine {
+          display: inline-block;
+          width: 1px;
+          height: 0.8vw;
+          background-color: #9e9d9d;
+          margin-top: 0.5vw;
+        }
+      }
+
+    }
+
   }
 </style>

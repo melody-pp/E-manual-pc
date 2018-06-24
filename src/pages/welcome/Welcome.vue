@@ -6,10 +6,14 @@
 </template>
 
 <script>
+  import { vuexMixin } from '../../common/mixins'
+
   export default {
     name: 'Welcome',
+    mixins: [vuexMixin],
     methods: {
       toIndex () {
+        this.setState({goBackPosition: 'home'})
         this.$emit('toIndex')
       }
     }

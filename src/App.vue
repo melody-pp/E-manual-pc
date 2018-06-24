@@ -13,8 +13,8 @@
       <Detail/>
     </div>
 
-    <Nav @toProduct="toProduct"/>
-
+    <Nav @toProduct="toProduct" @toHome="toHome" @goBack="goBack"/>
+    <FunctionBtn/>
     <div ref="$welcome" v-if="showWelcome" class="container welcome-container">
       <Welcome @toIndex="toProduct"/>
     </div>
@@ -24,17 +24,20 @@
 <script>
   import './common/lib'
   import 'normalize.css'
+  import { vuexMixin } from './common/mixins'
   import { TimelineLite, TweenLite } from 'gsap'
 
   import Welcome from './pages/welcome/Welcome'
   import Nav from './pages/nav/Nav'
+  import FunctionBtn from './pages/functionBtn/FunctionBtn'
   import Product from './pages/product/Product'
   import Cate3 from './pages/product/Cate3'
   import Detail from './pages/detail/Detail'
 
   export default {
     name: 'App',
-    components: {Welcome, Nav, Product, Cate3, Detail},
+    mixins: [vuexMixin],
+    components: {Welcome, Nav, FunctionBtn, Product, Cate3, Detail},
     data: () => ({
       showWelcome: true,
       showProduct: false,
@@ -43,25 +46,45 @@
     }),
     methods: {
       toProduct () {
+        this.bus.$emit('hideCate')
         this.showProduct = true
 
         this.showWelcome = false
         this.showCate3 = false
         this.showDetail = false
       },
-
       toCate3 () {
+        this.bus.$emit('hideCate')
         this.showCate3 = true
 
         this.showProduct = false
         this.showDetail = false
       },
       toDetail () {
-        console.log('toDetail app')
+        this.bus.$emit('hideCate')
         this.showDetail = true
 
         this.showProduct = false
         this.showCate3 = false
+      },
+      toHome () {
+        this.bus.$emit('hideCate')
+        this.showWelcome = true
+
+        this.showProduct = false
+        this.showCate3 = false
+        this.showDetail = false
+      },
+      goBack () {
+        if (this.showDetail) {
+          return this.goBackPosition === 'cate3'
+            ? this.toCate3()
+            : this.toProduct()
+        }
+
+        if (this.showCate3) {
+          this.toProduct()
+        }
       }
     }
   }
@@ -151,4 +174,15 @@
   .slick-dots li {
     margin: 0;
   }
+
+  .model {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+  }
+
 </style>

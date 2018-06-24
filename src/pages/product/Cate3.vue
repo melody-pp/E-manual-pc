@@ -36,8 +36,11 @@
 </template>
 
 <script>
+  import { vuexMixin } from '../../common/mixins'
+
   export default {
     name: 'Cate3',
+    mixins: [vuexMixin],
     data () {
       return {
         cate3List: [
@@ -58,7 +61,7 @@
     },
     methods: {
       toDetail () {
-        console.log('toDetail cate3')
+        this.setState({goBackPosition: 'cate3'})
 
         this.$emit('toDetail')
       }
