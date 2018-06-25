@@ -1,3 +1,7 @@
 export default {
-  goBackPosition:''
+  goBackPosition: '',
+  cate1List: [],
+  currentCate1Id: null,
+  currentCate2Id: null,
+  currentCate3Id: null,
 }

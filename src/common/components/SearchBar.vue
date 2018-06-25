@@ -25,7 +25,6 @@
         TweenLite.to(this.$refs.searchBar, 1, {y: '0', ease: Elastic.easeOut.config(1, 0.5)})
       },
       hideSearch () {
-        console.log('hideSearch')
         TweenLite.to(this.$refs.searchBar, 1, {y: '-200px'})
       }
     }

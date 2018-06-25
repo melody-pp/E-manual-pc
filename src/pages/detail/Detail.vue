@@ -1,20 +1,31 @@
 <template>
   <div class="detail">
-    <img src="../../assets/detail/01.png" class="leftImg">
-    <img src="../../assets/detail/02.png" class="rightImg">
+    <img :src="detail.p_contentthumb1" class="leftImg">
+    <img :src="detail.p_contentthumb2" class="rightImg">
     <div class="leftText">
-      <img src="../../assets/detail/01-1.png">
+      <img :src="detail.p_content1">
     </div>
     <div class="rightText">
-      <img src="../../assets/detail/02-2.png">
+      <img :src="detail.p_content1">
     </div>
     <img src="../../assets/detail/02-1.png" class="rightTxt1">
+    <img :src="detail.p_titlethumb" alt="">
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Detail'
+    name: 'Detail',
+    data () {
+      return {
+        detail: {},
+      }
+    },
+    mounted () {
+      this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: this.currentCate3Id}}).then(res => {
+        this.detail = res.data
+      })
+    }
   }
 </script>
 

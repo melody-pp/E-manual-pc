@@ -1,16 +1,16 @@
 <template>
-  <div class="cate3 clearfix" @click="toDetail">
+  <div class="cate3 clearfix">
     <div class="w50">
-      <img :src="cate3List[0].itemImg">
+      <img :src="cate3List[0].p_thumb" @click="toDetail(cate3List[0].id)">
       <div>
         <div class="w33">
-          <img :src="cate3List[4].itemImg">
-          <img :src="cate3List[8].itemImg">
+          <img :src="cate3List[3].p_thumb">
+          <img src="../../assets/cate3/09.png">
         </div>
-        <img class="w33" :src="cate3List[5].itemImg">
+        <img class="w33" :src="cate3List[4].p_thumb">
         <div class="w33">
-          <img :src="cate3List[6].itemImg">
-          <img :src="cate3List[9].itemImg">
+          <img src="../../assets/cate3/07.png">
+          <img :src="cate3List[6].p_thumb">
         </div>
       </div>
     </div>
@@ -19,17 +19,17 @@
       <div>
         <div class="w66">
           <div class="w100">
-            <img class="w50" :src="cate3List[1].itemImg">
-            <img class="w50" :src="cate3List[2].itemImg">
+            <img class="w50" src="../../assets/cate3/02.png">
+            <img class="w50" :src="cate3List[1].p_thumb">
           </div>
-          <img :src="cate3List[7].itemImg">
+          <img :src="cate3List[5].p_thumb">
         </div>
-        <img class="w33" :src="cate3List[3].itemImg">
+        <img class="w33" :src="cate3List[2].p_thumb">
       </div>
 
       <div class="w100">
-        <img class="w33" :src="cate3List[10].itemImg">
-        <img class="w66" :src="cate3List[11].itemImg">
+        <img class="w33" :src="cate3List[7].p_thumb">
+        <img class="w66" :src="cate3List[8].p_thumb">
       </div>
     </div>
   </div>
@@ -43,25 +43,18 @@
     mixins: [vuexMixin],
     data () {
       return {
-        cate3List: [
-          {itemImg: require('../../assets/cate3/01.png')},
-          {itemImg: require('../../assets/cate3/02.png')},
-          {itemImg: require('../../assets/cate3/03.png')},
-          {itemImg: require('../../assets/cate3/04.png')},
-          {itemImg: require('../../assets/cate3/05.png')},
-          {itemImg: require('../../assets/cate3/06.png')},
-          {itemImg: require('../../assets/cate3/07.png')},
-          {itemImg: require('../../assets/cate3/08.png')},
-          {itemImg: require('../../assets/cate3/09.png')},
-          {itemImg: require('../../assets/cate3/10.png')},
-          {itemImg: require('../../assets/cate3/11.png')},
-          {itemImg: require('../../assets/cate3/12.png')},
-        ]
+        cate3List: []
       }
     },
+    mounted () {
+      this.axios.get('/yingfei/index.php/index/index/threecategory', {params: {tcatid: this.currentCate2Id}}).then(res => {
+        this.cate3List = res.data
+      })
+    },
     methods: {
-      toDetail () {
+      toDetail (cate3Id) {
         this.setState({goBackPosition: 'cate3'})
+        this.setState({currentCate3Id: cate3Id})
 
         this.$emit('toDetail')
       }

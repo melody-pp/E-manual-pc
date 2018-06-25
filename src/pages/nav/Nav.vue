@@ -8,8 +8,8 @@
     <span>收藏夹</span>
 
     <div class="cate-list">
-      <div v-for="(cate, index) in cateList" class="cate clearfix" :key="index" @click="toProduct">
-        <img :src="cate.itemImg">
+      <div v-for="cate in cateList" class="cate clearfix" :key="cate.id" @click="toProduct(cate.id)">
+        <img :src="cate.p_thumb">
       </div>
     </div>
 
@@ -37,19 +37,14 @@
       showTimeline: null,
       hideTimeline: null,
       searchVisible: false,
-      cateList: [
-        {itemImg: require('../../assets/nav/04.png')},
-        {itemImg: require('../../assets/nav/05.png')},
-        {itemImg: require('../../assets/nav/06.png')},
-        {itemImg: require('../../assets/nav/07.png')},
-        {itemImg: require('../../assets/nav/08.png')},
-        {itemImg: require('../../assets/nav/09.png')},
-        {itemImg: require('../../assets/nav/10.png')},
-        {itemImg: require('../../assets/nav/11.png')},
-      ]
+      cateList: []
     }),
     mounted () {
       this.bus.$on('hideCate', this.hideCates.bind(this))
+      this.axios.post('/yingfei/index.php/index/index/onecategory').then(res => {
+        this.cateList = res.data
+        this.setState({currentCate1Id: this.cateList[0].id})
+      })
     },
     methods: {
       toggleCates () {
@@ -75,7 +70,6 @@
       },
       hideCates () {
         this.catesVisible = false
-
         if (this.showTimeline) {
           this.showTimeline.pause()
         }
@@ -86,10 +80,10 @@
 
         this.hideTimeline = new TimelineLite()
         const $cates = Array.from(document.querySelectorAll('.cate-list .cate'))
-
         this.hideTimeline.staggerTo($cates.reverse(), .6, {x: '120', autoAlpha: 0, ease: Power4.easeIn}, .1)
       },
-      toProduct () {
+      toProduct (cate1Id) {
+        this.setState({currentCate1Id: cate1Id})
         this.$emit('toProduct')
       },
       toggleSearch () {
@@ -209,8 +203,6 @@
           margin-top: 0.5vw;
         }
       }
-
     }
-
   }
 </style>

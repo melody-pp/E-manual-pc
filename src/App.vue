@@ -15,6 +15,7 @@
 
     <Nav @toProduct="toProduct" @toHome="toHome" @goBack="goBack"/>
     <FunctionBtn/>
+
     <div ref="$welcome" v-if="showWelcome" class="container welcome-container">
       <Welcome @toIndex="toProduct"/>
     </div>
@@ -47,33 +48,39 @@
     methods: {
       toProduct () {
         this.bus.$emit('hideCate')
-        this.showProduct = true
-
+        this.showProduct = false
         this.showWelcome = false
         this.showCate3 = false
         this.showDetail = false
+
+        this.$nextTick(() => this.showProduct = true)
       },
       toCate3 () {
         this.bus.$emit('hideCate')
-        this.showCate3 = true
-
         this.showProduct = false
+        this.showWelcome = false
+        this.showCate3 = false
         this.showDetail = false
+
+        this.$nextTick(() => this.showCate3 = true)
       },
       toDetail () {
         this.bus.$emit('hideCate')
-        this.showDetail = true
-
         this.showProduct = false
+        this.showWelcome = false
         this.showCate3 = false
+        this.showDetail = false
+
+        this.$nextTick(() => this.showDetail = true)
       },
       toHome () {
         this.bus.$emit('hideCate')
-        this.showWelcome = true
-
         this.showProduct = false
+        this.showWelcome = false
         this.showCate3 = false
         this.showDetail = false
+
+        this.$nextTick(() => this.showWelcome = true)
       },
       goBack () {
         if (this.showDetail) {

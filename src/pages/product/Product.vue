@@ -9,8 +9,8 @@
 
     <div class="slider-cate2-wrapper">
       <div class="slider-cate2">
-        <div v-for="(item, index) in cate2List" :key="index" class="cate2" @click="toCate3">
-          <img :src="item.itemImg" class="slider-img">
+        <div v-for="item in cate2List" :key="item.id" class="cate2" @click="toCate3(item.id)">
+          <img :src="item.p_thumb" class="slider-img">
         </div>
       </div>
     </div>
@@ -30,30 +30,31 @@
         {itemImg: require('../../assets/product/banner.png')},
         {itemImg: require('../../assets/product/banner.png')},
       ],
-      cate2List: [
-        {itemImg: require('../../assets/product/01.png')},
-        {itemImg: require('../../assets/product/02.png')},
-        {itemImg: require('../../assets/product/03.png')},
-        {itemImg: require('../../assets/product/04.png')},
-        {itemImg: require('../../assets/product/05.png')},
-        {itemImg: require('../../assets/product/06.png')},
-
-      ]
+      cate2List: []
     }),
     mounted () {
+      if (!this.currentCate1Id) {
+        return
+      }
       $('.slider-hot').slick({
         arrows: false,
         autoplay: true,
       })
-      $('.slider-cate2').slick({
-        slidesToShow: 5,
-        appendArrows: '.slider-cate2-wrapper',
-      })
 
+      this.axios.get('/yingfei/index.php/index/index/twocategory', {params: {ocatid: this.currentCate1Id}}).then(res => {
+        this.cate2List = res.data
+        this.$nextTick(function () {
+          $('.slider-cate2').slick({
+            slidesToShow: 5,
+            appendArrows: '.slider-cate2-wrapper',
+          })
+        })
+      })
     },
     methods: {
-      toCate3 () {
+      toCate3 (cate2Id) {
         this.setState({goBackPosition: 'cate2'})
+        this.setState({currentCate2Id: cate2Id})
         this.$emit('toCate3')
       },
       toDetail () {
@@ -61,6 +62,12 @@
 
         this.$emit('toDetail')
       }
+    },
+    beforeDestroy () {
+      try {
+        $('.slider-hot').slick('unslick')
+        $('.slider-cate2').slick('unslick')
+      } catch (e) {}
     }
   }
 </script>
