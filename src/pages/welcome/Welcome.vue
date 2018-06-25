@@ -35,7 +35,7 @@
       color: #fff;
       outline: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 1vw;
       font-weight: 500;
       padding: 10px 40px;
       letter-spacing: 5px;

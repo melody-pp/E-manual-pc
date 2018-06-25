@@ -22,7 +22,7 @@
   .detail {
     padding-top: 11vh;
     font-size: 0;
-    height: 100vh;
+    width: 100vw;
     .leftImg, .rightImg {
       width: 50%;
       height: 89vh;

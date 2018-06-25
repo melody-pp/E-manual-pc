@@ -130,6 +130,7 @@
   .container {
     overflow: hidden;
     position: absolute;
+    height: 100%;
   }
 
   .welcome-container {
