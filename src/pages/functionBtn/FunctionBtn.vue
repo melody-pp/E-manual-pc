@@ -1,7 +1,7 @@
 <template>
   <div class="functionBtn">
     <img src="../../assets/functionBtn/collectIcon.png">
-    <img src="../../assets/functionBtn/collectIcon.png" @click="toLocation=!toLocation">
+    <img src="../../assets/functionBtn/locationIcon.png" @click="toLocation=!toLocation">
     <img src="../../assets/functionBtn/shareIcon.png">
     <div @click="toLocation=!toLocation" v-show="toLocation" class="model">
       <div class="location-slider">

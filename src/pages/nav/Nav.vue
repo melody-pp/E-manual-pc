@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <img src="../../assets/nav/return.png" class="return" @click="goBack">
-    <img src="../../assets/nav/return.png" class="search" @click="showSearch">
+    <img src="../../assets/nav/searchIcon.png" class="search" @click="toggleSearch">
 
     <span @click="toHome">首页</span>
     <span @click="toggleCates">分类 <img src="../../assets/nav/arrows.png"></span>
@@ -36,6 +36,7 @@
       catesVisible: false,
       showTimeline: null,
       hideTimeline: null,
+      searchVisible: false,
       cateList: [
         {itemImg: require('../../assets/nav/04.png')},
         {itemImg: require('../../assets/nav/05.png')},
@@ -91,10 +92,15 @@
       toProduct () {
         this.$emit('toProduct')
       },
+      toggleSearch () {
+        this.searchVisible ? this.hideSearch() : this.showSearch()
+      },
       showSearch () {
+        this.searchVisible = true
         TweenLite.to(this.$refs.searchBar, 1, {y: window.innerHeight * 0.1, ease: Elastic.easeOut.config(1, 0.5)})
       },
       hideSearch () {
+        this.searchVisible = false
         TweenLite.to(this.$refs.searchBar, 1, {y: '-300px'})
       },
       toHome () {
