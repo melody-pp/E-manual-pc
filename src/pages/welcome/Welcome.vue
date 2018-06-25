@@ -37,8 +37,8 @@
       cursor: pointer;
       font-size: 1vw;
       font-weight: 500;
-      padding: 10px 40px;
-      letter-spacing: 5px;
+      padding: 0.6vw 2.4vw;
+      letter-spacing: 0.2vw;
       position: absolute;
       transition: all .7s;
       border: 1px solid #fff;
