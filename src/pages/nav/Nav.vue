@@ -4,7 +4,7 @@
     <img src="../../assets/nav/searchIcon.png" class="search" @click="toggleSearch">
 
     <span @click="toHome">首页</span>
-    <span @click="toggleCates">分类 <img src="../../assets/nav/arrows.png"></span>
+    <span @click="toggleCates">分类 <img src="../../assets/nav/arrows.png" class="categoryArrow"></span>
     <span>收藏夹</span>
 
     <div class="cate-list">
@@ -124,7 +124,9 @@
     background-color: #e8e8e8;
     text-align: center;
     border-top: 1vh solid #a77d4b;
-
+    .categoryArrow {
+      width: 1vw;
+    }
     > span {
       font-size: 1.5vw;
       margin: 0 3vw;

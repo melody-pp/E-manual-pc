@@ -90,8 +90,8 @@
     background-color: #7d6b5a;
 
     /deep/ .slick-arrow {
-      width: 19px;
-      height: 73px;
+      width: 1vw;
+      height: 4vw;
       &:before {
         content: '';
       }
@@ -100,12 +100,15 @@
         z-index: 2;
         left: 3vw;
         background-image: url("../../assets/product/left.png");
-
+        background-repeat: no-repeat;
+        background-size: contain;
       }
 
       &.slick-next {
         right: 3vw;
         background-image: url("../../assets/product/right.png");
+        background-repeat: no-repeat;
+        background-size: contain;
       }
     }
 
