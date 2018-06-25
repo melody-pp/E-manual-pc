@@ -47,7 +47,7 @@
       }
     },
     mounted () {
-      this.axios.get('/yingfei/index.php/index/index/threecategory', {params: {tcatid: this.currentCate2Id}}).then(res => {
+      this.axios.get('/yingfei/index.php/index/index/threecategory', {params: {tcatid: 13}}).then(res => {
         this.cate3List = res.data
       })
     },

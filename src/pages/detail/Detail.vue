@@ -6,7 +6,7 @@
       <img :src="detail.p_content1">
     </div>
     <div class="rightText">
-      <img :src="detail.p_content1">
+      <img :src="detail.p_content2">
     </div>
     <img src="../../assets/detail/02-1.png" class="rightTxt1">
     <img :src="detail.p_titlethumb" alt="">
@@ -16,13 +16,11 @@
 <script>
   export default {
     name: 'Detail',
-    data () {
-      return {
-        detail: {},
-      }
-    },
+    data: () => ({
+      detail: {},
+    }),
     mounted () {
-      this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: this.currentCate3Id}}).then(res => {
+      this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: 1}}).then(res => {
         this.detail = res.data
       })
     }
