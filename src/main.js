@@ -3,12 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
-// www.shis.com/dlkjdfpc
-// www.shis.com/dlkjdfmb
-//
-// if(isMobile){
-//   location.herf = dlkjdfmb
-// }
+
+if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+  location.herf = 'http://www.pview-ad.com/E-manual-pc'
+}
 
 Vue.config.productionTip = false
 Vue.prototype.bus = new Vue()
