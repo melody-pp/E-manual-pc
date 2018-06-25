@@ -31,7 +31,7 @@
     .leftText {
       position: absolute;
       bottom: 11%;
-      left: 21%;
+      left: 23%;
       width: 26%;
       height: 24%;
       overflow: auto;
