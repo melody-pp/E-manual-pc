@@ -9,18 +9,22 @@
       <img :src="detail.p_content2">
     </div>
     <img src="../../assets/detail/02-1.png" class="rightTxt1">
-    <img :src="detail.p_titlethumb" alt="">
+    <img :src="detail.p_titlethumb" class="titleThumb">
   </div>
 </template>
 
 <script>
+  import { vuexMixin } from '../../common/mixins'
+
   export default {
     name: 'Detail',
+    mixins: [vuexMixin],
     data: () => ({
       detail: {},
     }),
     mounted () {
-      this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: 1}}).then(res => {
+      console.log(this.currentCate3Id)
+      this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: this.currentCate3Id}}).then(res => {
         this.detail = res.data[0]
       })
     }
@@ -36,6 +40,13 @@
       width: 50%;
       height: 89vh;
       float: left;
+    }
+    .titleThumb {
+      position: absolute;
+      top: 9vw;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20vw;
     }
     .leftText {
       position: absolute;

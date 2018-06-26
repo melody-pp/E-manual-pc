@@ -10,7 +10,7 @@
         <img class="w33" :src="cate3List[4].p_thumb">
         <div class="w33">
           <img src="../../assets/cate3/07.png">
-          <img :src="cate3List[6].p_thumb">
+          <img :src="cate3List[5].p_thumb">
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
             <img class="w50" src="../../assets/cate3/02.png">
             <img class="w50" :src="cate3List[1].p_thumb">
           </div>
-          <img :src="cate3List[5].p_thumb">
+          <img :src="cate3List[6].p_thumb">
         </div>
         <img class="w33" :src="cate3List[2].p_thumb">
       </div>
@@ -47,7 +47,7 @@
       }
     },
     mounted () {
-      this.axios.get('/yingfei/index.php/index/index/threecategory', {params: {tcatid: 13}}).then(res => {
+      this.axios.get('/yingfei/index.php/index/index/threecategory', {params: {tcatid: this.currentCate2Id}}).then(res => {
         this.cate3List = res.data
       })
     },
@@ -55,7 +55,6 @@
       toDetail (cate3Id) {
         this.setState({goBackPosition: 'cate3'})
         this.setState({currentCate3Id: cate3Id})
-
         this.$emit('toDetail')
       }
     }

@@ -17,7 +17,7 @@
     <FunctionBtn/>
 
     <div ref="$welcome" v-if="showWelcome" class="container welcome-container">
-      <Welcome @toIndex="toProduct"/>
+      <Welcome @toIndex="hideWelcome"/>
     </div>
   </div>
 </template>
@@ -46,13 +46,29 @@
       showDetail: false,
     }),
     methods: {
+      hideWelcome () {
+        const vm = this
+        const {$welcome} = vm.$refs
+
+        new TimelineLite({
+          onComplete () {
+            vm.toProduct()
+          }
+        }).set($welcome, {
+          width: '100vh',
+          'border-bottom-right-radius': '1000px',
+        }).to($welcome, 1.5, {
+          width: '1px',
+          height: '1px',
+          'border-bottom-right-radius': '1px',
+        })
+      },
       toProduct () {
         this.bus.$emit('hideCate')
         this.showProduct = false
         this.showWelcome = false
         this.showCate3 = false
         this.showDetail = false
-
         this.$nextTick(() => this.showProduct = true)
       },
       toCate3 () {
