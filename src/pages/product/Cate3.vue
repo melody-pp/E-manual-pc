@@ -1,7 +1,7 @@
 <template>
   <div class="cate3 clearfix">
     <div class="w50">
-      <img :src="cate3List[0].p_thumb" @click="toDetail(cate3List[0].id)">
+      <img :src="cate3List[0].p_thumb" @click="toDetail(cate3List[0].id)" class="cate3Img1">
       <div>
         <div class="w33">
           <img :src="cate3List[3].p_thumb">
@@ -66,7 +66,9 @@
     padding-top: 11vh;
     font-size: 0;
     height: 100vh;
-
+    .cate3Img1 {
+      cursor: pointer;
+    }
     img {
       float: left;
       width: 100%;

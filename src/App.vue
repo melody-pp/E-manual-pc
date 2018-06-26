@@ -174,6 +174,7 @@
 
   .slider-img {
     width: 100%;
+    cursor: pointer;
   }
 
   .slick-dotted.slick-slider {

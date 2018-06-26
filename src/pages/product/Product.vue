@@ -2,7 +2,7 @@
   <div class="product">
 
     <div class="slider-hot">
-      <div v-for="item in hotList" :key="item.scatid" @click="toDetail(item.scatid)">
+      <div v-for="(item, index) in hotList" :key="index" @click="toDetail(hotList.scatid)">
         <img :src="item.sowing" class="slider-img">
       </div>
     </div>
@@ -25,12 +25,9 @@
     name: 'Product',
     mixins: [vuexMixin],
     data: () => ({
-      hotList: [],
       cate2List: []
     }),
     mounted () {
-      this.hotList = this.cate1List
-
       if (!this.currentCate1Id) {
         return
       }
