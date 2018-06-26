@@ -43,6 +43,7 @@
       this.bus.$on('hideCate', this.hideCates.bind(this))
       this.axios.post('/yingfei/index.php/index/index/onecategory').then(res => {
         this.cateList = res.data
+        this.setState({cate1List: res.data})
         this.setState({currentCate1Id: this.cateList[0].id})
       })
     },

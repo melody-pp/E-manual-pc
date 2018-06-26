@@ -2,8 +2,8 @@
   <div class="product">
 
     <div class="slider-hot">
-      <div v-for="(item, index) in hotList" :key="index" @click="toDetail">
-        <img :src="item.itemImg" class="slider-img">
+      <div v-for="item in hotList" :key="item.scatid" @click="toDetail(item.scatid)">
+        <img :src="item.sowing" class="slider-img">
       </div>
     </div>
 
@@ -25,14 +25,12 @@
     name: 'Product',
     mixins: [vuexMixin],
     data: () => ({
-      hotList: [
-        {itemImg: require('../../assets/product/banner.png')},
-        {itemImg: require('../../assets/product/banner.png')},
-        {itemImg: require('../../assets/product/banner.png')},
-      ],
+      hotList: [],
       cate2List: []
     }),
     mounted () {
+      this.hotList = this.cate1List
+
       if (!this.currentCate1Id) {
         return
       }
@@ -57,8 +55,8 @@
         this.setState({currentCate2Id: cate2Id})
         this.$emit('toCate3')
       },
-      toDetail () {
-        this.setState({goBackPosition: 'cate2'})
+      toDetail (itemScatid) {
+        this.setState({goBackPosition: 'cate2', currentCate3Id: itemScatid})
 
         this.$emit('toDetail')
       }

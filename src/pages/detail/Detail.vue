@@ -6,9 +6,9 @@
       <img :src="detail.p_content1">
     </div>
     <div class="rightText">
-      <img :src="detail.p_content2">
+      <img :src="detail.p_content2_2">
     </div>
-    <img src="../../assets/detail/02-1.png" class="rightTxt1">
+    <img  :src="detail.p_content2_1" class="rightTxt1">
     <img :src="detail.p_titlethumb" class="titleThumb">
   </div>
 </template>
