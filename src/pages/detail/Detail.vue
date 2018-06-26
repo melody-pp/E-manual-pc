@@ -21,7 +21,7 @@
     }),
     mounted () {
       this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: 1}}).then(res => {
-        this.detail = res.data
+        this.detail = res.data[0]
       })
     }
   }
