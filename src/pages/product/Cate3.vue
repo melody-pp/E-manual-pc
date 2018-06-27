@@ -24,7 +24,7 @@
           </div>
           <img :src="cate3List[6].p_thumb">
         </div>
-        <img class="w33" :src="cate3List[2].p_thumb">
+        <img class="w33 cate3Img1" :src="cate3List[2].p_thumb" @click="toDetail(cate3List[2].id)">
       </div>
 
       <div class="w100">

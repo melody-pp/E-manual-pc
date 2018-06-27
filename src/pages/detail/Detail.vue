@@ -8,7 +8,7 @@
     <div class="rightText">
       <img :src="detail.p_content2_2">
     </div>
-    <img  :src="detail.p_content2_1" class="rightTxt1">
+    <img :src="detail.p_content2_1" class="rightTxt1">
     <img :src="detail.p_titlethumb" class="titleThumb">
   </div>
 </template>
@@ -23,7 +23,6 @@
       detail: {},
     }),
     mounted () {
-      console.log(this.currentCate3Id)
       this.axios.get('/yingfei/index.php/index/index/content', {params: {scatid: this.currentCate3Id}}).then(res => {
         this.detail = res.data[0]
       })
