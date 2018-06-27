@@ -150,6 +150,10 @@
     float: right;
   }
 
+  img {
+    user-select: none;
+  }
+
   .container {
     overflow: hidden;
     position: absolute;

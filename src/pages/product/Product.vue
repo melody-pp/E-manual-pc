@@ -3,7 +3,7 @@
 
     <div class="slider-hot">
       <div v-for="(item, index) in hotList" :key="index" @click="toDetail(hotList.scatid)">
-        <img :src="item.sowing" class="slider-img">
+        <img :src="item.p_sowing" class="slider-img">
       </div>
     </div>
 
